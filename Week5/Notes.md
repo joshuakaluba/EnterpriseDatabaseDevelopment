@@ -19,9 +19,16 @@ To implement audit fields, such as `CreatedBy`, `CreatedDate`, `LastModifiedBy`,
 ```csharp
 public abstract class AuditableEntity
 {
+    [ScaffoldColumn(false)]
     public string CreatedBy { get; set; }
+
+    [ScaffoldColumn(false)]
     public DateTime CreatedDate { get; set; }
+
+    [ScaffoldColumn(false)]
     public string LastModifiedBy { get; set; }
+
+    [ScaffoldColumn(false)]
     public DateTime? LastModifiedDate { get; set; }
 }
 ```
@@ -73,6 +80,7 @@ public class YourEntity : AuditableEntity
     // Other properties
 
     [Timestamp]
+    [ScaffoldColumn(false)]
     public byte[] RowVersion { get; set; }
 }
 ```
