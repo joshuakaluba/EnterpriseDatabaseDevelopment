@@ -2,6 +2,8 @@
 
 In this lab, you will learn how to implement audit fields and optimistic concurrency control using Rowversion/Timestamp in an ASP.NET Core MVC application.
 
+Due 10th October 2023. Please email me a copy of the completed assignment.
+
 ## Lab Tasks
 
 ### Task 1: Create a New ASP.NET Core MVC Project
