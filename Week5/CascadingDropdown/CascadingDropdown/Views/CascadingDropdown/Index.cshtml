@@ -1,0 +1,48 @@
+﻿@model CascadingDropdownViewModel
+
+<h1>Cascading Dropdown Page</h1>
+
+<div class="controller">
+    <div class="col">
+        <div class="row">
+            @Html.DropDownListFor(model => model.SelectedCountryId, new SelectList(Model.Countries, "Id", "Name"), "Select a Country", new { id = "CountryDropdown" })
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="row">
+            <div id="CityDropdownContainer">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cities[0].Name, "City:")
+                    <select id="CityId" name="CityId" class="form-control"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#CountryDropdown").change(function () {
+                var selectedCountryId = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "/CascadingDropdown/GetCitiesByCountry",
+                    data: { countryId: selectedCountryId },
+                    success: function (data) {
+                        console.log(data);
+
+                        $("#CityId").empty();
+                        $.each(data, function (i, city) {
+                            $("#CityId").append('<option value="' + city.id + '">' + city.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
